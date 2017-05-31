@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="yes" name="apple-touch-fullscreen">
+    <meta content="telephone=no,email=no" name="format-detection">
+    <title><%= title %></title>
+    <style type="text/css">
+        .loading .load{display: block;text-align: center;font-size: 24px;}
+        .loading .core{display: none;}
+        .load{display: none;}
+        .core{display: block;}
+    </style>
+    <script type="text/javascript">
+        document.onreadystatechange = loadOver;//当页面加载状态改变的时候执行这个方法.
+        function loadOver()
+        {
+            if(document.readyState == "complete"){ //当页面加载状态
+                document.body.className="";
+            }
+        }
+    </script>
+    <script src="./common/js/flexible.js"></script>
+    <link rel="stylesheet" href="./common/css/style.css">
+    <link rel="stylesheet" href="./search/css/creditAddress.css">
+</head>
+<body class="loading" ng-controller="ctrlCredit">
+<section class="load">加载中……</section>
+<section class="core">
+    <header>
+        <h1>
+            <a href="javascript:void(0);" class="icon">房毅贷</a>
+            <span class="tel_number">客服电话：4001-718-718</span>
+        </h1>
+    </header>
+    <section class="mainContent textCenter">
+        <div class="f30 addressTitle">
+            <label for="">{{nameArea}}征信网点地址</label>
+            <p  ng-click="selectFn(0)" class="container">{{nameArea}}
+                </p>
+        </div>
+        <ul class="f24 textLeft" id="addressList">
+            <li ng-repeat="item in areaList" >
+                <p class="addName">{{item.name}}</p>
+                <p class="add">{{item.address}}</p>
+                <p class="addMobile"><tel>{{item.mobile}}</tel></p>
+            </li>
+        </ul>
+        <!--<div  class="formUsage dn" id="formUsage0" style="padding-top:0.8rem">-->
+            <!--<div class="popTitle"><a href="###" class="cancelPop">取消</a> <a href="###" class="confirm">确定</a></div>-->
+            <!--<div ng-repeat="item in webNet" data-value="{{webNet.area}}" ng-click="getList(item.area)" ng-model="selectArea" style="line-height: 0.7rem;">{{item.area}}</div>-->
+        <!--</div>-->
+        <div class="inquiry_option showSelect" id="formUsage0" hm-panmove="moveEvent($event)" style="display: none;">
+            <div class="inquiry_ctrl showSelect">
+                <div class="inquiry_ctrl_title" ng-click="changeValue($event)">
+                    <span data-attr="cancel">取消</span>
+                    <span data-attr="sure">确定</span>
+                </div>
+                <ul class="inquiry_ctrl_content" hm-panstart="dragStart($event)" hm-panmove="drag($event)" hm-panend="dragEnd($event)">
+                    <li ng-repeat="item in webNet" ng-click="getClickChannel($event)"  data-value="{{item.area}}">{{item.area}}</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <footer class="textCenter">
+        <div class="copyright">版权所有 © 2016-2017 新毅金融</div>
+        <div><span class="icp">京ICP证160795号</span>
+            <span class="contact">客服 <a class="hotline" href="tel:4001718718">4001-718-718</a></span>
+        </div>
+    </footer>
+    <div class="mask dn"></div>
+</section>
+<script>
+
+</script>
+<script type="text/javascript" src="./common/js/jquery.js"></script>
+<script  src="./inquiry/script/common/hammer.js"></script>
+<script type="text/javascript" src="./common/js/angular.js"></script>
+<script  src="./inquiry/script/common/angular.hammer.min.js"></script>
+<script type="text/javascript" src="./common/js/global.js"></script>
+<script type="text/javascript" src="./search/js/creditAddress.js"></script>
+</body>
+</html>

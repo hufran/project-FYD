@@ -1,0 +1,59 @@
+/*活动页面*/
+body{
+    background: #fff;
+}
+.main .active_head{
+    font-size:0.395rem;
+    line-height:0.661rem;
+    text-align: center;
+}
+.active_head .active_bank_title{
+    background: url("../images/bank_header.jpg") repeat-x;
+    background-size:contain;
+    padding-top:1rem;
+    height: 0;
+}
+.active_head h1{
+    margin:0 0.93rem;
+}
+.active_head h1 .deepGreen{
+    border-bottom:1px solid #bab9b9;
+    padding-bottom: 0.34rem;
+}
+.active_head h2{
+    color:#b9b9b9;
+    font-size:0.24rem;
+    padding:0 0.24rem;
+}
+.active_head h2 span{
+    padding-right:0.1rem;
+}
+.active_bank_article{
+    margin:0 0.93rem;
+    font-size:0.32rem;
+    line-height:0.46rem;
+}
+.active_bank_article p{
+    margin-bottom:0.4rem ;
+    color: #767777;
+    text-indent: 2em;
+}
+.active_bank_article .active_bank_img{
+    text-align:center;
+}
+.active_bank_article .active_bank_img img{
+    width:4.73rem;
+    border:0;
+    margin-bottom: 0.14rem;
+}
+.active_bank_article .active_bank_img span{
+    color:#030000;
+    display: inline-block;
+    font-size:0.21rem;
+}
+.active_bank_foot{
+    background: url("../images/bank_footer.jpg") no-repeat;
+    background-size:cover;
+    height: 3.08rem;
+    margin-top:1.5rem;
+}

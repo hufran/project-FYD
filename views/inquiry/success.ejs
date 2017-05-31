@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="yes" name="apple-touch-fullscreen">
+    <meta content="telephone=no,email=no" name="format-detection">
+    <title><%= title %></title>
+    <link rel='stylesheet' type="text/css"  href='../inquiry/css/base.css' />
+    <link rel='stylesheet' type="text/css" href='../inquiry/css/boilerplate.css' />
+</head>
+<body ng-app="myApp" ng-controller="myCtrl">
+    <section class="main">
+        <input type="hidden" ng-init="type= <%= type%>">
+        <header>
+            <h1>
+                <a href="javascript:void(0);" class="icon">房毅贷</a>
+                <span class="tel_number">客服电话：4001-718-718</span>
+            </h1>
+        </header>
+        <section class="sign_success">
+            <h2 ng-bind="pointMsg">您的申请已提交成功，请耐心等待，稍后会有客户经理跟您联系!</h2>
+            <button ng-click="closeWindow()">关闭</button>
+        </section>
+        <footer>
+            <p>版权所有©2016-2017 新毅金融</p>
+            <p><span>京ICP证160795号</span><span>客服电话：4001-718-718</span></p>
+        </footer>
+    </section>
+    <script  src="../inquiry/script/common/flexible.js"></script>
+    <script  src="../inquiry/script/common/angular.js"></script>
+    <script  src="../inquiry/script/common/jweixin.js"></script>
+    <script  src="../inquiry/script/signSuccess.js"></script>
+</body>

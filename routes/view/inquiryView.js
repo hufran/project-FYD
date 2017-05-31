@@ -1,0 +1,107 @@
+/**
+ * Created by Administrator on 2017/3/14.
+ */
+var Event=require('../util/event.js');
+var util=require('../util/util');
+
+function inquiryView(){
+    Event.apply(this,arguments);
+    var self=this;
+    return {
+        index:function(req,res,next){
+            self.eventEmitter.addListener("inquiry",function(data){
+                self.eventEmitter.removeAllListeners("inquiry");
+                try{
+                    if(data){
+                        res.render("./inquiry/inquiry",data);
+                        return;
+                    }
+                }catch(error){
+                    self.eventEmitter.emit("errorAppend");
+                }
+
+            });
+        },
+        autoInquiry:function(req,res,next){
+            self.eventEmitter.once("inquiryAuto",function(data){
+                try{
+                    if(data){
+                        res.render("./inquiry/autoInquiry",data);
+                        return;
+                    }
+                }catch(error){
+                    self.eventEmitter.emit("errorAppend");
+                }
+            });
+        },
+        autoInquirySuccess:function(req,res,next){
+            self.eventEmitter.addListener("autoSuccess",function(data){
+                self.eventEmitter.removeAllListeners("autoSuccess");
+                try{
+                    if(data){
+                        res.render("./inquiry/autoSuccess",data);
+                        return;
+                    }
+                }catch(error){
+                    self.eventEmitter.emit("errorAppend");
+                }
+            });
+        },
+        signSuccess:function(req,res,next){
+            self.eventEmitter.addListener("success",function(data){
+                self.eventEmitter.removeAllListeners("success");
+                try{
+                    if(data){
+                        res.render("./inquiry/success",data);
+                        return;
+                    }
+                }catch(error){
+                    self.eventEmitter.emit("errorAppend");
+                }
+            });
+        },
+        guide:function(req,res,next){
+            self.eventEmitter.addListener("guide",function(data){
+                self.eventEmitter.removeAllListeners("guide");
+                try{
+                    if(data){
+                        res.render("./inquiry/guide",data);
+                        return;
+                    }
+                    return;
+                }catch(error){
+                    self.eventEmitter.emit("errorAppend");
+                }
+            })
+        },
+        inquiryPage:function(req,res,next){
+            self.eventEmitter.addListener("inquiryData",function(data){
+                self.eventEmitter.removeAllListeners("inquiryData");
+                try{
+                    if(data){
+                        res.render("./inquiry/inquiryList",data);
+                        return;
+                    }
+                }catch(error){
+                    self.eventEmitter.emit("errorAppend");
+                }
+            })
+        },
+        declarationPage:function(req,res,next){
+            self.eventEmitter.addListener("taxationData",function(data){
+                self.eventEmitter.removeAllListeners("taxationData");
+                try{
+                    if(data){
+                        res.render("./inquiry/taxationForm",data);
+                        return;
+                    }
+                }catch(error){
+                    self.eventEmitter.emit("errorAppend");
+                }
+            })
+        }
+    }
+}
+util.inherits(inquiryView,Event);
+var inquiry=new inquiryView();
+module.exports=inquiry;

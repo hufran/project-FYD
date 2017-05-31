@@ -1,0 +1,8 @@
+*{
+    margin:0px;
+    padding:0px;
+}
+
+.clear:after{
+    display: block;clear: both;content: ".";visibility: hidden;height: 0;
+}

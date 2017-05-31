@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="yes" name="apple-touch-fullscreen">
+    <meta content="telephone=no,email=no" name="format-detection">
+    <title><%= title %></title>
+    <style type="text/css">
+        .loading .load{display: block;text-align: center;font-size: 24px;}
+        .loading .core{display: none;}
+        .load{display: none;}
+        .core{display: block;}
+    </style>
+    <script type="text/javascript">
+        document.onreadystatechange = loadOver;//当页面加载状态改变的时候执行这个方法.
+        function loadOver()
+        {
+            if(document.readyState == "complete"){ //当页面加载状态
+                document.body.className="";
+            }
+        }
+    </script>
+    <script src="../common/js/flexible.js"></script>
+    <link rel="stylesheet" href="../common/css/style.css">
+    <link rel="stylesheet" href="../account/css/login.css">
+</head>
+<body class="loading" ng-controller="ctrlAgent">
+<section class="load">加载中……</section>
+<section class="core" id="agentStyle">
+    <header>
+        <h1>
+            <a href="javascript:void(0);" class="icon">房毅贷</a>
+            <span class="tel_number">客服电话：4001-718-718</span>
+        </h1>
+    </header>
+    <section class="mainContent textCenter" ng-if="!isSuccess">
+        <div class="inputOuter">
+            <input type="text" placeholder="微信号" class="f24" name="wechat" ng-model="$parent.wechat" id="wechat">
+            <div class="errMsg">{{errMsgWechat}}</div>
+        </div>
+        <div class="inputOuter">
+            <div ng-class="{true:'container black',false: 'container'}['渠道选择'!=channelName]" ng-click="selectFn(0)">{{channelName}} </div>
+            <div class="errMsg">{{errMsgChannelName}}</div>
+        <div class="inquiry_option showSelect" id="formUsage0" style="display: none;">
+            <div class="inquiry_ctrl showSelect">
+                <div class="inquiry_ctrl_title" ng-click="changeValue($event)">
+                    <span data-attr="cancel">取消</span>
+                    <span data-attr="sure">确定</span>
+                </div>
+                <ul class="inquiry_ctrl_content">
+                    <li ng-repeat="item in channelList" ng-click="getClickChannel(item.id)"  id="{{item.id}}" data-value="{{item.channelName}}">{{item.channelName}}</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <button class="submitL f30" ng-click="authentication()" ng-if="!isSuccess" >认证</button>
+    <section class="mainContent textCenter" ng-if="isSuccess">
+        <div class="inputOuter">
+            认证成功！<br>
+            请重新进入公众号进行询价！
+        </div>
+    </section>
+    <button class="submitL f30"  ng-if="isSuccess" ng-click="closeWindow()">关闭</button>
+    <footer class="textCenter">
+        <div class="copyright">版权所有 © 2016-2017 新毅金融</div>
+        <div><span class="icp">京ICP证160795号</span>
+            <span class="contact">客服 <a class="hotline" href="tel:4001718718">4001-718-718</a></span>
+        </div>
+    </footer>
+    <!--<div class="mask dn"></div>-->
+</section>
+<script>
+    channelList=<%- JSON.stringify(channelList) %>;
+    userId = '<%=userId%>';
+    channelOpenId = '<%=channelOpenId%>';
+</script>
+<script type="text/javascript" src="../common/js/jquery.js"></script>
+<script type="text/javascript" src="../common/js/angular.js"></script>
+<script type="text/javascript" src="../common/js/global.js"></script>
+<script  src="../inquiry/script/common/jweixin.js"></script>
+<script type="text/javascript" src="../agentAuth/js/agent.js"></script>
+</body>
+</html>

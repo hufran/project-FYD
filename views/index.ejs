@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="UTF-8">
+  <meta content="yes" name="apple-mobile-web-app-capable">
+  <meta content="yes" name="apple-touch-fullscreen">
+  <meta content="telephone=no,email=no" name="format-detection">
+  <title><%= title %></title>
+  <style type="text/css">
+    .loading .load{display: block;text-align: center;font-size: 24px;}
+    .loading .core{display: none;}
+    .load{display: none;}
+    .core{display: block;}
+    ul li{
+      line-height:0.8rem;font-size:0.4rem;}
+
+  </style>
+  <script type="text/javascript">
+    document.onreadystatechange = loadOver;//当页面加载状态改变的时候执行这个方法.
+    function loadOver()
+    {
+      if(document.readyState == "complete"){ //当页面加载状态
+        document.body.className="";
+      }
+    }
+  </script>
+  <script src="./common/js/flexible.js"></script>
+  <link rel="stylesheet" href="./common/css/style.css">
+</head>
+<body style="padding:0.5rem" ng-controller="myCtrl">
+<div>
+  <input type="text" placeholder="请输入您的openId" class="f30" ng-model="openId" name="openId">
+</div>
+
+<ul style="margin-top:0.5rem">
+  <li><a href="./login/{{linkOpen}}">经纪人认证（登录）</a></li>
+  <li><a href="./notarialAddress">（查查）查公证处</a></li>
+  <li><a href="./constructionAddress">（查查）查建委</a></li>
+  <li><a href="./creditAddress">（查查）查征信网点</a></li>
+  <li><a href="./inquiry/list">（指南）资料清单</a></li>
+  <li><a href="./inquiry/procedure">（指南）流程指南</a></li>
+  <li><a href="./inquiry/complaint{{linkOpen}}">（指南）投诉反馈</a></li>
+  <li><a href="./inquiry/{{linkOpen}}">（我要）询价</a></li>
+  <li><a href="./inquiry/autoInquiry{{linkOpen}}">自动询价</a></li>
+  <li><a href="./inquiry/inquiryList{{linkOpen}}">（我要）报单</a></li>
+</ul>
+
+<div class="upload" style="width:1.5rem;height: 1.5rem;background: #ccc;;" ng-click="uploadImg()">
+  <img src="" alt="上传的图片" />
+</div>
+<input type="button" ng-click="submit()" value="提交">
+<script type="text/javascript" src="./common/js/jquery.js"></script>
+<script type="text/javascript" src="./common/js/angular.js"></script>
+<script  src="./inquiry/script/common/jweixin.js"></script>
+<script>
+  var app = angular.module('myApp',[]);
+  app.controller('myCtrl', function($scope, $http) {
+    $scope.$watch("openId",function(){
+      if($scope.openId != undefined){
+        $scope.linkOpen = "?wechatId=1&openId="+$scope.openId;
+      }else{
+        $scope.linkOpen = "";
+      }
+    });
+  })
+
+</script>
+</body>
+</html>

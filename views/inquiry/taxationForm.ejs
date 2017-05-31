@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="yes" name="apple-touch-fullscreen">
+    <meta content="telephone=no,email=no" name="format-detection">
+    <title><%= title %></title>
+    <link rel='stylesheet' type="text/css"  href='../inquiry/css/base.css' />
+    <link rel='stylesheet' type="text/css" href='../inquiry/css/boilerplate.css' />
+</head>
+<body ng-app="myApp" ng-controller="myCtrl">
+    <section class="main">
+        <header>
+            <h1>
+                <a href="javascript:void(0);" class="icon">房毅贷</a>
+                <span class="tel_number">客服电话：4001-718-718</span>
+            </h1>
+        </header>
+        <input type="hidden" ng-init="">
+        <input type="hidden" ng-init="data=<%= JSON.stringify(data)%>">
+        <section class="taxation">
+            <h2 >查询单号：{{id}}</h2>
+            <ul>
+                <li ng-repeat="item in list">
+                    <label>
+                        <input type="{{item.unit?'number':'text'}}" ng-class="item.class" placeholder="{{item.name}}" ng-model="item.value" ng-blur="validate($index)" /><span ng-if="item.unit" class="taxation_msg">万元</span>
+                    </label>
+                    <div class="pointMsg red" ng-if="item.point" ng-bind="item.pointMsg">输入字符长度超限！</div>
+                </li>
+                <!--<li>
+                    <label>
+                        <input class="taxation_money" type="number" placeholder="贷款金额" value="" />
+                    </label>
+                    <div class="pointMsg red">贷款金额超过贷款额度！</div>
+                </li>-->
+            </ul>
+            <div class="btnGroup">
+                <a href="javascript:void(0);" ng-click="submit()" ng-class="submitClass">提交</a>
+                <a href="javascript:void(0);" ng-click="back()" class="borderBtn">返回</a>
+            </div>
+        </section>
+
+
+        <footer>
+            <p>版权所有©2016-2017 新毅金融</p>
+            <p><span>京ICP证160795号</span><span>客服电话：4001-718-718</span></p>
+        </footer>
+    </section>
+    <script  src="../inquiry/script/common/flexible.js"></script>
+    <script  src="../inquiry/script/common/angular.js"></script>
+    <script  src="../inquiry/script/common/jweixin.js"></script>
+    <script  src="../inquiry/script/taxationForm.js"></script>
+</body>

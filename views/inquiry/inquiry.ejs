@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="yes" name="apple-touch-fullscreen">
+    <meta content="telephone=no,email=no" name="format-detection">
+    <title><%= title %></title>
+    <link rel='stylesheet' type="text/css"  href='../inquiry/css/base.css' />
+    <link rel='stylesheet' type="text/css" href='../inquiry/css/boilerplate.css' />
+</head>
+<body ng-app="myApp" ng-controller="myCtrl">
+    <section class="main">
+        <header>
+            <h1>
+                <a href="javascript:void(0);" class="icon">房毅贷</a>
+                <span class="tel_number">客服电话：4001-718-718</span>
+            </h1>
+        </header>
+        <input type="hidden" ng-init="inquiryData=<%= JSON.stringify(data)%>">
+        <section class="inquiry_main">
+            <form method='post' action='javascript:;' enctype='multipart/form-data' novalidate>
+                <ul>
+                    <li ng-style="showPage" class="remainingSum">
+                        <label>
+                            <div class="inquiry_select cur" data-index="0" ng-click="changeStatus($event)" ng-bind="roomCheckName"></div>
+                            <div  class="inquiry_option hideSelect" id="formUsage0"  ng-class="class"  hm-panmove="moveEvent($event)">
+                                <div class="inquiry_ctrl" ng-class="class">
+                                    <div class="inquiry_ctrl_title" ng-click="changeValue($event)">
+                                        <span data-attr="cancel">取消</span><span data-attr="sure">确定</span>
+                                    </div>
+                                    <ul class="inquiry_ctrl_content" hm-panstart="dragStart($event)" hm-panmove="drag($event)" hm-panend="dragEnd($event)">
+                                        <li ng-repeat="item in roomInfo" ng-class="{cur:item.checked}" data-type="{{item.type}}" data-checked="{{item.checked}}" data-index="{{item.index}}" ng-click="changeOptions(item.type,item.index,$event)" ng-bind="item.name"></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </label>
+                        <div class="pointMsg red" style="display: none;">请选择询价方式！</div>
+                    </li>
+                    <li ng-repeat="list in dataList" ng-style="showPage" class="remainingSum" ng-if="list.show">
+                        <label ng-if="!list.options">
+                            <input type="{{list.unit?'number':'text'}}"  placeholder="{{list.name}}"  ng-model="list.value" ng-class="list.class" ng-blur="validate($index)" value="" /><span class="inquiry_unit" ng-if="list.unit" ng-bind="list.unitValue"></span>
+                        </label>
+                        <label ng-if="list.options">
+                            <div class="inquiry_select cur" data-type="{{list.type}}" data-index="{{$index+1}}" ng-click="changeStatus($event)" ng-bind="list.name"></div>
+                            <div  class="inquiry_option hideSelect" id="formUsage0" hm-panmove="moveEvent($event)" ng-class="list.optionsClass">
+                                <div class="inquiry_ctrl" ng-class="list.optionsClass" >
+                                    <div class="inquiry_ctrl_title" data-type="{{list.type}}" ng-click="changeValue($event)">
+                                        <span data-attr="cancel" data-type="{{list.type}}">取消</span><span data-attr="sure" data-type="{{list.type}}">确定</span>
+                                    </div>
+                                    <ul class="inquiry_ctrl_content" hm-panstart="dragStart($event)" hm-panmove="drag($event)" hm-panend="dragEnd($event)">
+                                        <li ng-repeat="data in list.options" data-type="{{list.type}}" ng-class="{cur:data.checked}" ng-click="changeOptions(list.type,data.index,$event)" ng-bind="data.name" data-value="{{data.name}}" data-index="{{data.index}}" data-checked="{{data.checked}}"></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </label>
+                        <div class="pointMsg red" ng-if="list.point" ng-bind="list.pointMsg"></div>
+                    </li>
+
+                </ul>
+                <div class="uploadFile" ng-style="showPage" ng-show="showUpload">
+                    <p>上传房本照片:</p>
+                    <div class="uploadFile_container" data-value="{{isUpload}}" ng-click="uploadImg()">
+                        <input type="file" id="upload" ng-show="uploadMethod">
+                        <img ng-if="imgUrl" id="uploadImg" src="{{imgUrl}}" alt="loading" />
+                        <div class="uploadFile_Bac" ng-if="!imgUrl"></div>
+                    </div>
+                    <div class="red pointMsg" ng-if="uploadError" ng-bind="uploadErrorMsg">图片必须上传，且图片大小不得超过2M！</div>
+                </div>
+                <input type="submit" ng-class="btnClass" ng-click="submit()" value="提交">
+            </form>
+
+        </section>
+        <div class="alertMsg" ng-style="showPage" ng-if="alertMsg">
+            <div class="container">
+                <img src="../inquiry/images/wait.gif" />
+                <p>提交中......</p>
+            </div>
+        </div>
+    </section>
+    <script  src="../inquiry/script/common/flexible.js"></script>
+    <script  src="../inquiry/script/common/hammer.js"></script>
+    <script  src="../inquiry/script/common/angular.js"></script>
+    <script  src="../inquiry/script/common/angular.hammer.min.js"></script>
+    <script  src="../inquiry/script/common/jquery.js"></script>
+    <script  src="../inquiry/script/common/jweixin.js"></script>
+    <script  src="../inquiry/script/inquiry.js"></script>
+</body>

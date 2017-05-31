@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="yes" name="apple-touch-fullscreen">
+    <meta content="telephone=no,email=no" name="format-detection">
+    <title><%= title %></title>
+    <link rel='stylesheet' type="text/css"  href='../inquiry/css/base.css' />
+    <link rel='stylesheet' type="text/css" href='../inquiry/css/boilerplate.css' />
+</head>
+<body ng-app="myApp" ng-controller="myCtrl">
+    <section class="main">
+        <input type="hidden" ng-init="type= <%= type%>">
+        <input type="hidden" ng-init="guideData= <%= JSON.stringify(data)%>">
+        <header>
+            <h1>
+                <a href="javascript:void(0);" class="icon">房毅贷</a>
+                <span class="tel_number">客服电话：4001-718-718</span>
+            </h1>
+        </header>
+        <section class="procedure" ng-if="type==0" ng-style="showPage">
+            <!--流程清单-->
+            <ul class="procedure_list">
+                <li ng-repeat="list in infoList">
+                    <div class="icon"><i ng-bind="$index+1">1</i></div>
+                    <div class="detail">
+                        <p class="title" ng-bind="list.name">申请询价</p>
+                        <div ng-repeat="item in list.intro" ng-bind="item">点击询价，上传房本照片或者填写信息，提交评估申请。</div>
+                    </div>
+                </li>
+            </ul>
+        </section>
+        <section class="list" ng-if="type==1" ng-style="showPage">
+            <!--资料清单-->
+            <h2>
+                <span>婚姻状态</span>
+                <div class="inquiry_select cur" ng-click="changeStatus($event)" ng-bind="selectValue.name"></div>
+                <div  class="inquiry_option" id="formUsage0" hm-panmove="moveEvent($event)" ng-class="selectValue.optionsClass">
+                    <div class="inquiry_ctrl hideSelect" ng-class="selectValue.optionsClass">
+                        <div class="inquiry_ctrl_title" ng-click="changeValue($event)">
+                            <span data-attr="cancel">取消</span><span data-attr="sure">确定</span>
+                        </div>
+                        <ul class="inquiry_ctrl_content" hm-panstart="dragStart($event)" hm-panmove="drag($event)" hm-panend="dragEnd($event)">
+                            <li ng-repeat="item in selectValue.options" ng-class="{cur:item.checked}" data-checked="{{item.checked}}" data-index="{{item.index}}" ng-click="changeOptions(item.index,$event)" ng-bind="item.name"></li>
+                        </ul>
+                    </div>
+                </div>
+            </h2>
+            <div class="person">
+                <p class="title">办理人</p>
+                <div class="personName" ng-bind="infoList.transactor"></div>
+            </div>
+            <ul class="material">
+                <li ng-repeat="key in infoList.info">
+                    <h3><i class="icon"></i><span ng-bind="key.name"></span></h3>
+                    <div ng-if="key.extraPos=='top'" ng-class="key.extraClass" ng-bind="key.extra"></div>
+                    <div class="content">
+                        <p ng-repeat="item in key.list"><i>{{$index+1}}.</i><span ng-bind="key.list[$index]"></span></p>
+                    </div>
+                    <div ng-if="key.extraPos=='bottom'" ng-class="key.extraClass" ><i></i><pre ng-bind="key.extra"></pre></div>
+                </li>
+            </ul>
+        </section>
+        <section class="complain" ng-if="type==2" ng-style="showPage">
+            <!--投诉-->
+            <div class="container">
+                <div class="title">请输入投诉或反馈内容：</div>
+                <textarea placeholder="请输入投诉内容，不得超过500字！" ng-blur="validate()"  ng-model="complainValue.value"></textarea>
+                <div class="pointMsg red" ng-if="showPoint" ng-bind="pointMsg"></div>
+            </div>
+
+            <button ng-click="submitComplain()">提交</button>
+        </section>
+
+        <footer>
+            <p>版权所有©2016-2017 新毅金融</p>
+            <p><span>京ICP证160795号</span><span>客服电话：4001-718-718</span></p>
+        </footer>
+    </section>
+    <script  src="../inquiry/script/common/flexible.js"></script>
+    <script  src="../inquiry/script/common/hammer.js"></script>
+    <script  src="../inquiry/script/common/angular.js"></script>
+    <script  src="../inquiry/script/common/angular.hammer.min.js"></script>
+    <script  src="../inquiry/script/guide.js"></script>
+</body>

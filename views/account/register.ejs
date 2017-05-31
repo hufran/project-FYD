@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="yes" name="apple-touch-fullscreen">
+    <meta content="telephone=no,email=no" name="format-detection">
+    <title><%= title %></title>
+    <style type="text/css">
+        .loading .load{display: block;text-align: center;font-size: 24px;}
+        .loading .core{display: none;}
+        .load{display: none;}
+        .core{display: block;}
+    </style>
+    <script type="text/javascript">
+        document.onreadystatechange = loadOver;//当页面加载状态改变的时候执行这个方法.
+        function loadOver()
+        {
+            if(document.readyState == "complete"){ //当页面加载状态
+                document.body.className="";
+            }
+        }
+    </script>
+    <script src="../common/js/flexible.js"></script>
+    <link rel="stylesheet" href="../common/css/style.css">
+    <link rel="stylesheet" href="../account/css/login.css">
+</head>
+<body class="loading" ng-controller="ctrlRegister">
+<section class="load">加载中……</section>
+<section class="core">
+    <header>
+        <h1>
+            <a href="javascript:void(0);" class="icon">房毅贷</a>
+            <span class="tel_number">客服电话：4001-718-718</span>
+        </h1>
+    </header>
+    <section class="mainContent textLeft" id="registerStyle">
+        <div class="inputOuter">
+            <label for="name">姓名</label><input type="text" placeholder="姓名" class="f24" ng-model="name" name="name" id="name" ng-blur="nameBlur()">
+            <div class="errMsg">{{errMsgName}}</div>
+        </div>
+        <div class="inputOuter">
+            <label for="mobile">手机号</label><input type="tel" placeholder="手机号码" class="f24" ng-model="mobile" name="mobile" id="mobile" ng-blur="blur()">
+            <div class="errMsg">{{errMsgMobile}}</div>
+        </div>
+        <div class="inputOuterShort">
+            <!--<input type="text" placeholder="请输入验证码" class="f24" ng-model="formData.code" name="code"><input type="button" value="获取手机验证码">-->
+            <label for="captcha">验证码</label><input type="text" placeholder="请输入验证码" class="f24" ng-model="captcha" name="captcha" id="captcha" ng-blur="validateCode()">
+            <input type="button" value="获取手机验证码" class="f24 codes" ng-click="getCode()">
+            <div class="errMsg">{{errMsgCaptcha}}</div>
+        </div>
+        <div class="inputOuter">
+            <label for="password">密码</label><input type="password" placeholder="密码8-16个字符" class="f24" ng-model="password" name="password" id="password" ng-blur="comparePwd()">
+            <!--ng-blur="comparePwd()"-->
+            <div class="errMsg">{{errMsgpwd}}</div>
+        </div>
+        <div class="inputOuter">
+            <label for="repeatPassword">确认密码</label><input type="password" placeholder="确认密码" class="f24" ng-model="repeatPassword" name="repeatPassword" id="repeatPassword" ng-blur="comparePwd()">
+            <!--ng-blur="comparePwd()"-->
+            <div class="errMsg">{{errMsgRepwd}}</div>
+        </div>
+        <div class="inputOuter">
+        <div class="errMsg">{{errorMsg}}</div>
+        </div>
+    </section>
+    <div class="protoDiv">
+        <input type="checkbox" id="proto">同意新毅网络的 <a href="../protoPage" target="_blank">《用户注册协议》</a>
+    <div class="errMsg">{{errMsgProto}}</div>
+    </div>
+    <button class="submitL f30 marginT" ng-click="submitRegister()">立即注册</button>
+    <footer class="textCenter">
+        <div class="copyright">版权所有 © 2016-2017 新毅金融</div>
+        <div><span class="icp">京ICP证160795号</span>
+            <span class="contact">客服 <a class="hotline" href="tel:4001718718">4001-718-718</a></span>
+        </div>
+    </footer>
+</section>
+<script>
+    userId = '<%=userId%>';
+</script>
+<script type="text/javascript" src="../common/js/jquery.js"></script>
+<script type="text/javascript" src="../common/js/angular.js"></script>
+<script type="text/javascript" src="../common/js/global.js"></script>
+<script type="text/javascript" src="../account/js/register.js"></script>
+</body>
+</html>

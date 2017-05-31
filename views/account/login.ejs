@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="yes" name="apple-touch-fullscreen">
+    <meta content="telephone=no,email=no" name="format-detection">
+    <title><%= title %></title>
+    <style type="text/css">
+        .loading .load{display: block;text-align: center;font-size: 24px;}
+        .loading .core{display: none;}
+        .load{display: none;}
+        .core{display: block;}
+    </style>
+    <script type="text/javascript">
+        document.onreadystatechange = loadOver;//当页面加载状态改变的时候执行这个方法.
+        function loadOver()
+        {
+            if(document.readyState == "complete"){ //当页面加载状态
+                document.body.className="";
+            }
+        }
+    </script>
+    <script src="../common/js/flexible.js"></script>
+    <link rel="stylesheet" href="../common/css/style.css">
+    <link rel="stylesheet" href="../account/css/login.css">
+</head>
+<body class="loading" ng-controller="ctrlLogin">
+<section class="load">加载中……</section>
+<section class="core">
+    <header>
+        <h1>
+            <a href="javascript:void(0);" class="icon">房毅贷</a>
+            <span class="tel_number">客服电话：4001-718-718</span>
+        </h1>
+    </header>
+    <style>
+    </style>
+    <h1 class="textCenter hello">尊敬的会员，您好！</h1>
+    <section class="mainContent textCenter">
+        <div class="inputOuter loginNameBg">
+            <input type="tel" placeholder="请输入您的手机号码" class="f24" ng-model="loginName" name="loginName" ng-blur="blur()">
+        </div>
+        <div class="inputOuter pwdBg">
+            <input type="password" placeholder="请输入您的密码" class="f24" ng-model="password" name="password" ng-blur="validatePass()">
+        </div>
+        <div class="redMsg">{{errorMsg}}</div>
+    </section>
+    <button class="submitL f30" ng-click="submitLogin()">立即登录</button>
+    <div class="otherLink"><a href="../register/{{alink}}" class="fl">注册</a><a href="../forgetPwd/{{alink}}" class="fr">忘记密码</a></div>
+    <footer class="textCenter">
+        <div class="copyright">版权所有 © 2016-2017 新毅金融</div>
+        <div><span class="icp">京ICP证160795号</span>
+            <span class="contact">客服 <a class="hotline" href="tel:4001718718">4001-718-718</a></span>
+        </div>
+    </footer>
+</section>
+<script type="text/javascript" src="../common/js/jquery.js"></script>
+<script type="text/javascript" src="../common/js/angular.js"></script>
+<script type="text/javascript" src="../common/js/global.js"></script>
+<script type="text/javascript" src="../account/js/login.js"></script>
+</body>
+</html>

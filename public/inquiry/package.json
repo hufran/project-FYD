@@ -1,0 +1,16 @@
+{
+  "name": "project-fyd",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "compile": "babel --plugins transform-es2015-modules-umd --watch js -d script"
+  },
+  "devDependencies": {
+    "babel-preset-es2015": "^6.24.0",
+    "babel-preset-react": "^6.23.0",
+    "babel-preset-stage-3": "^6.22.0"
+  },
+  "dependencies": {
+    "babel-polyfill": "^6.23.0"
+  }
+}

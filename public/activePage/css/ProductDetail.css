@@ -1,0 +1,41 @@
+#headerImage{
+    display: block;
+    width: 100%;
+    height: 0.6rem;
+    /*浏览器默认值fontsize = 75;设计值:45/75*/
+}
+
+#footerImage{
+    display: block;
+    width: 100%;
+}
+.header{
+    background: red;
+}
+
+.introduceTitle{
+    text-align: center;
+    padding-top: 1.03rem;
+    padding-bottom: 0.47rem;
+    padding-left: auto;
+    font-size: 0.4rem;
+    color: blue;
+}
+
+.introduceContent{
+    margin:auto 1.53rem;
+    line-height:0.46rem;
+}
+
+.mainColor{
+    color: #5ca0f9;
+}
+
+.contentColor{
+    color: #777777;
+}
+
+.contentBkgColor{
+    background:url("../images/contentBkg.jpg") repeat 0 0 ;
+    background-size: contain;
+}

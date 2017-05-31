@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="yes" name="apple-touch-fullscreen">
+    <meta content="telephone=no,email=no" name="format-detection">
+    <title><%= title %></title>
+    <link rel='stylesheet' type="text/css"  href='../inquiry/css/base.css' />
+    <link rel='stylesheet' type="text/css" href='../inquiry/css/boilerplate.css' />
+</head>
+<body ng-app="myApp" ng-controller="myCtrl">
+    <section class="main">
+        <header>
+            <h1>
+                <a href="javascript:void(0);" class="icon">房毅贷</a>
+                <span class="tel_number">客服电话：4001-718-718</span>
+            </h1>
+        </header>
+        <input type="hidden" ng-init="dataList=<%=JSON.stringify(data)%>" />
+        <section ng-if="!pagePosition" ng-style="showPage" class="inquiry_list">
+            <h2>我的询价</h2>
+            <div ng-if="hasData" ng-style="showPage" class="container">
+                <div class="inquiryContent">
+                    <ul class="inquiryList" hm-panstart="dragStart($event)" hm-panmove="drag($event)" hm-panend="dragEnd($event)" ng-style="marginTop">
+                        <li ng-repeat="list in listData.content track by $index" ng-click="hrefLink('./inquiryDetail?id='+list.id+'&openId='+dataList.openId)">
+                            <div class="title"><span>单号：<strong ng-bind="list.id"></strong></span><a ng-href="./inquiryDetail?id={{list.id}}&openId={{dataList.openId}}">详情&gt;</a> </div>
+                            <!--<div class="content" ng-if="list.isOwnership==0 && list.inquiryType!=1"><span>房屋地址：{{list.roomAddress}}</span></div>-->
+                            <!--<div class="content" ng-if="list.isOwnership==0"><span>小区名称：{{list.areaName}}</span></div>-->
+                            <div class="content" ng-if="list.isOwnership==0"><span>小区名称：{{list.areaName}}</span></div>
+                            <div class="area">
+                                <!--<span>{{list.isOwnership==1?"询价方式":"建筑面积"}}：{{list.isOwnership==1?inquiry[list.isOwnership]:list.housingArea}}{{list.isOwnership==1?"":"平米"}}</span>-->
+                                <span style="width: 6.8rem;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;">{{list.isOwnership==1?"小区名称":"建筑面积"}}：{{list.isOwnership==1?list.areaName:list.housingArea}}{{list.isOwnership==1?"":"平米"}}</span><a class="{{(list.status==1)?'cur':''}}" data-value="{{list.status}}" ng-href="{{list.status==1?('./declarationForm?loanAmount='+list.loanLimitMax+'&id='+list.id+'&openId='+dataList.openId):'javascript:void(0);'}}">{{list.status==2?"已报":"报单"}}</a> </div>
+                        </li>
+                    </ul>
+                    <p class="point" ng-if="showPoint" ng-bind="showPointMsg">没有更多信息了</p>
+                </div>
+            </div>
+            <div class="noData" ng-style="showPage" ng-if="!hasData">
+                暂无数据
+            </div>
+        </section>
+        <section class="inquiry_detail" ng-style="showPage" ng-if="pagePosition">
+            <h2>查询单号：{{listData.id}}</h2>
+            <ul class="detailList">
+                <li><strong>询价方式：</strong><span>{{inquiry[listData.isOwnership]}}</span></li>
+                <!--<li ng-if="listData.inquiryType == 1"><strong>询价方式：</strong><span>{{inquiry[2]}}</span></li>-->
+                <li><strong>小区名称：</strong><span>{{listData.areaName}}</span></li>
+                <li ng-if="listData.isOwnership==0 && listData.roomAddress"><strong>房屋地址：</strong><span>{{listData.roomAddress}}</span></li>
+                <li ng-if="listData.isOwnership==0"><strong>建筑面积：</strong><span>{{listData.housingArea}}平米</span></li>
+                <li ng-if="listData.isOwnership==0"><strong>规划用途：</strong><span>{{listData.housingType}}</span></li>
+                <li><strong>抵押情况：</strong><span>{{mortgage[listData.housingMortgage]}}</span></li>
+                <li ng-if="listData.mortgageAmount>0"><strong>一抵余额：</strong><span>{{listData.mortgageAmount}}万元</span></li>
+                <li ng-if="listData.isOwnership==1"><strong>房本照片：</strong><span><img ng-if="listData.picUrl4Work" ng-src="{{listData.version==='dev'?listData.picUrl4Test:listData.picUrl4Work}}" alt="房本照片"/></span></li>
+                <li><strong>贷款额度：</strong><span>{{(listData.status!=0)?(listData.loanLimitMin+"-"+listData.loanLimitMax+"万元"):"待反馈"}}</span></li>
+            </ul>
+            <div class="btnGroup">
+                <a href="{{(listData.status==1)?('./declarationForm?loanAmount='+listData.loanLimitMax+'&id='+listData.id+'&openId='+dataList.openId):'javascript:void(0);'}}" class="{{(listData.status==1)?'blueBtn':'grayBtn'}}" ng-if="listData.status!=2">报单</a>
+                <a href="javascript:void(0);" ng-click="goBack()" class="borderBtn">返回</a>
+            </div>
+        </section>
+        <footer>
+            <p>版权所有©2016-2017 新毅金融</p>
+            <p><span>京ICP证160795号</span><span>客服电话：4001-718-718</span></p>
+        </footer>
+    </section>
+    <script  src="../inquiry/script/common/flexible.js"></script>
+    <script  src="../inquiry/script/common/hammer.js"></script>
+    <script  src="../inquiry/script/common/angular.js"></script>
+    <script  src="../inquiry/script/common/angular.hammer.min.js"></script>
+    <script  src="../inquiry/script/inquiryList.js"></script>
+</body>
