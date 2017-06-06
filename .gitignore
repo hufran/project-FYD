@@ -4,5 +4,3 @@
 .DS_Store
 npm-debug.log
 init.sh.bak
-# config.js是手工维护的，所以例外.
-config.js
