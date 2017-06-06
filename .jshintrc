@@ -1,0 +1,4 @@
+{
+  "node":true,//配置jsHint用于检查node代码，以防止node特有的全局变量使用时报错
+  "undef":true
+}

@@ -322,14 +322,14 @@ function inquiryModel(){
                         mortgageAmount:req.body.mortgageAmount
                     };
                     console.log("提交的最小值和最大值…………………………………………");
-                    console.log(form)
                     for(var key in form){
                         if(!form[key]){
                             delete form[key];
                         }
                     }
                     var filePath;
-                    if(req.files.pic){
+
+                    if(req.files&&req.files.pic){
                         //表单方式上传的文件
                         console.log("表单方式上穿");
                         form.pic=fs.createReadStream(req.files.pic.path);

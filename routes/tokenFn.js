@@ -88,7 +88,7 @@ exports.getApiFn=function(req,res,baseUrl,api){
 	var options = {
 		url: baseUrl +api+params,
 		method: 'GET',
-		headers:headers 
+		headers:headers
 	};
 	console.log(options);
 	var get_res=request(options, investCallback);
@@ -112,12 +112,11 @@ exports.postApiFn=function(req,res,baseUrl,api){
   	var data = qs.stringify(req.body);
   	//var data = req.body;
   	console.log('postApiFn');
-  	console.log(api);
   	//console.log(data);
   	var options = {
 	    url: baseUrl +api,
 	    method: 'POST',
-	    headers:headers 
+	    headers:headers
     };
 	console.log(options)
     var get_res=request(options, indexCallback);
