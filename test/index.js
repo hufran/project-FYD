@@ -5,7 +5,7 @@ var app=require('../app');
 
 //自动询价和询价测试
 describe("auto inquiry page:",function(){
-    this.timeout(6000);
+    this.timeout(10000);
     //验证小区名称
     it("The areaName is required:(should return false)",function(){
         assert.equal(/^.{1,50}$/.test(""),false);
@@ -61,7 +61,7 @@ describe("auto inquiry page:",function(){
 
 //登录页面验证
 describe("Verify userinfo:",function(){
-    this.timeout(6000);
+    this.timeout(10000);
     it("Verify user login interface",function(done){
         request(app).post('/newApi/login').send({"loginName":"15701336587","password":"123456","source":"h5"})
            .set('Content-Type', 'application/x-www-form-urlencoded').end(function(err,res){
